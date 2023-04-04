@@ -30,12 +30,11 @@ int main(int argc, char *argv[]) {
     parseArgsServer(argc, argv, &log_file, &timeout);
 
     int sockfd = -1; // дескриптор сокета
-    FILE *logfd = NULL; // дескриптор файла журнала
 
     char* logFileName = "server.log";
 
     // Открываем файл журнала
-    openLog(&log_file, &logfd, logFileName);
+    openLog(&log_file, logFileName);
 
     // Создаем сокет
     sockfd = socket(AF_INET, SOCK_DGRAM, 0);
@@ -59,7 +58,7 @@ int main(int argc, char *argv[]) {
 
     // Выводим информацию о сервере на экран и в файл журнала
     printf("Сервер слушает на %s:%d\n", inet_ntoa(servaddr.sin_addr), ntohs(servaddr.sin_port));
-    writeLog(logfd, "Сервер слушает на %s:%d\n", inet_ntoa(servaddr.sin_addr), ntohs(servaddr.sin_port));
+    writeLog("Сервер слушает на %s:%d\n", inet_ntoa(servaddr.sin_addr), ntohs(servaddr.sin_port));
 
     // Устанавливаем обработчики сигналов SIGINT, SIGTERM и SIGSEGV
     signal(SIGINT, signalHandler);
@@ -80,11 +79,11 @@ int main(int argc, char *argv[]) {
         buffer[numbytes] = '\0'; // добавляем нулевой символ в конец сообщения
         // Выводим информацию о клиенте и его запросе на экран и в файл журнала
         printf("Получен запрос от %s:%d\n", inet_ntoa(cliaddr.sin_addr), ntohs(cliaddr.sin_port));
-        writeLog(logfd,"Получен запрос от %s:%d\n", inet_ntoa(cliaddr.sin_addr), ntohs(cliaddr.sin_port));
+        writeLog("Получен запрос от %s:%d\n", inet_ntoa(cliaddr.sin_addr), ntohs(cliaddr.sin_port));
         printf("Пакет длиной %d байтов\n", numbytes);
-        writeLog(logfd,"Пакет длиной %d байтов\n", numbytes);
+        writeLog("Пакет длиной %d байтов\n", numbytes);
         printf("Пакет содержит \"%s\"\n", buffer);
-        writeLog(logfd,"Пакет содержит \"%s\"\n", buffer);
+        writeLog("Пакет содержит \"%s\"\n", buffer);
         double a, b, c, d;
         sscanf(buffer, "%lf %lf %lf %lf", &a, &b, &c, &d);
         if (d == 0) { // квадратное уравнение
@@ -93,7 +92,7 @@ int main(int argc, char *argv[]) {
             SolveCubic(a, b, c, d); // решаем кубическое уравнение и выводим разложение на множители
         } else { // неверный формат запроса
             printf("Неверный формат запроса.\n");
-            writeLog(logfd, "Неверный формат запроса.\n");
+            writeLog("Неверный формат запроса.\n");
         }
     }
 }

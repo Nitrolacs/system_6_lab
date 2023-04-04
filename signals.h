@@ -9,9 +9,9 @@ void signalHandler(int signum);
 
 void timeoutHandler();
 
-void openLog(char **log_file, FILE **logfd, char* logFileName);
+void openLog(char **log_file, char* logFileName);
 
-void writeLog(FILE *logfd, const char *format, ...);
+void writeLog(const char *format, ...);
 
 void setTimer(int timeout);
 

@@ -8,21 +8,27 @@
 
 #include "signals.h"
 
+FILE* logfd; // имя файла журнала
+
 // Функция для обработки сигналов, приводящих к аварийному завершению процесса
 void signalHandler(int signum) {
     // Выводим сообщение об ошибке в зависимости от типа сигнала
     switch (signum) {
         case SIGINT:
             fprintf(stderr, "Программа прервана пользователем.\n");
+            writeLog("%s\n", "Программа прервана пользователем.");
             break;
         case SIGTERM:
             fprintf(stderr, "Программа завершена системой.\n");
+            writeLog("%s\n", "Программа завершена системой.");
             break;
         case SIGSEGV:
             fprintf(stderr, "Программа вызвала ошибку сегментации.\n");
+            writeLog("%s\n", "Программа вызвала ошибку сегментации.");
             break;
         default:
             fprintf(stderr, "Программа завершена неизвестным сигналом.\n");
+            writeLog("%s\n", "Программа завершена неизвестным сигналом.");
             break;
     }
     // Выходим из программы с кодом ошибки
@@ -33,27 +39,28 @@ void signalHandler(int signum) {
 void timeoutHandler() {
     // Выводим сообщение об ошибке
     fprintf(stderr, "Превышено время ожидания.\n");
+    writeLog("%s\n", "Превышено время ожидания.");
     // Выходим из программы с кодом ошибки
     exit(1);
 }
 
 // Функция для открытия файла журнала для записи или создания его, если он не существует
-void openLog(char **log_file, FILE **logfd, char* logFileName) {
+void openLog(char** log_file, char* logFileName) {
     // Если имя файла журнала не задано, то используем стандартное имя
     if (*log_file == NULL) {
         *log_file = logFileName;
     }
     // Открываем файл журнала для записи или создаем его, если он не существует
-    *logfd = fopen(*log_file, "a");
+    logfd = fopen(*log_file, "a");
     // Проверяем на ошибки
-    if (*logfd == NULL) {
+    if (logfd == NULL) {
         perror("fopen");
         exit(1);
     }
 }
 
 // Функция для записи сообщений в файл журнала с помощью fprintf
-void writeLog(FILE *logfd, const char *format, ...) {
+void writeLog(const char *format, ...) {
     // Проверяем, что файл журнала открыт
     if (logfd == NULL) {
         return;

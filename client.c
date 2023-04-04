@@ -16,6 +16,9 @@
 #define PORT 5555
 #define MAXDATASIZE 1024
 
+// переменную для хранения дескриптора файла журнала
+extern FILE* logfd;
+
 int main(int argc, char *argv[]) {
     int sockfd; // дескриптор сокета
     char buffer[MAXDATASIZE]; // буфер для приема и отправки данных
@@ -40,19 +43,17 @@ int main(int argc, char *argv[]) {
     int result = ParseArgsClient(argc, argv, &log_file, &timeout, &a, &b, &c,
                                  &d);
 
-    // Проверяем результат функции
-    if (result != 0) {
-        fprintf(stderr, "Ошибка при обработке коэффициентов.\n");
-        exit(1);
-    }
-
-    // Объявляем и инициализируем переменную для хранения дескриптора файла журнала
-    FILE *logfd = NULL;
-
     char* logFileName = "client.log";
 
     // Открываем файл журнала
-    openLog(&log_file, &logfd, logFileName);
+    openLog(&log_file, logFileName);
+
+    // Проверяем результат функции
+    if (result != 0) {
+        fprintf(stderr, "Ошибка при обработке коэффициентов.\n");
+        writeLog("%s\n", "Ошибка при обработке коэффициентов.");
+        exit(1);
+    }
 
     // Создаем сокет с протоколом UDP
     sockfd = socket(AF_INET, SOCK_DGRAM, 0);
@@ -83,7 +84,7 @@ int main(int argc, char *argv[]) {
 
     // Выводим информацию об отправленном запросе на экран и в файл журнала
     printf("Отправлен запрос: %s\n", buffer);
-    writeLog(logfd, "Отправлен запрос: %s\n", buffer);
+    writeLog("Отправлен запрос: %s\n", buffer);
 
     // Устанавливаем таймер неактивности пользователя
     setTimer(timeout);
@@ -97,10 +98,6 @@ int main(int argc, char *argv[]) {
         exit(1);
     }
     buffer[numbytes] = '\0'; // добавляем нулевой символ в конец сообщения
-
-    // Выводим информацию о полученном ответе на экран и в файл журнала
-    printf("Получен ответ: %s\n", buffer);
-    writeLog(logfd, "Получен ответ: %s\n", buffer);
 
     // Закрываем сокет и файл журнала
     close(sockfd);

@@ -1,4 +1,4 @@
-# Install script for directory: /media/sf_VM_EXCHANGE/system_programming/5_lab
+# Install script for directory: /media/sf_VM_EXCHANGE/system_programming/6_lab
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/media/sf_VM_EXCHANGE/system_programming/5_lab/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/media/sf_VM_EXCHANGE/system_programming/6_lab/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

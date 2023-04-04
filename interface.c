@@ -13,13 +13,7 @@ int ProcessCoefficients(int argc, char* argv[], double* a, double* b,
     // Объявляем переменную для хранения кода возврата функции getopt
     int opt;
 
-    // Проверяем количество аргументов командной строки
-    if (argc != 7 && argc != 9) // Проверяем, что аргументов 7 или 9
-    {
-        fprintf(stderr,
-                "Использование: ./client -a a -b b -c c [-d d]\n");
-        return -1;
-    }
+
 
     // Объявляем указатели на конец чисел
     char* endptrA;

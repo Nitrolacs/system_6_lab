@@ -20,7 +20,8 @@
  * \return Код ошибки
  */
 int
-ProcessCoefficients(int argc, char* argv[], double* a, double* b, double* c,
-                    double* d);
+ParseArgs(int argc, char* argv[], char** log_file, int* timeout, double* a,
+          double* b, double* c,
+          double* d);
 
 #endif //INC_5_LAB_INTERFACE_H

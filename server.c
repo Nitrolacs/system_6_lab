@@ -19,9 +19,8 @@
 
 
 // Глобальные переменные для хранения аргументов командной строки
-char *log_file = NULL; // имя файла журнала
+char* log_file = NULL; // имя файла журнала
 int timeout = 0; // время ожидания сообщений от клиента в секундах
-int verbose = 0; // флаг для вывода дополнительной информации
 
 // Глобальные переменные для хранения дескрипторов сокета и файла журнала
 int sockfd = -1; // дескриптор сокета
@@ -29,13 +28,6 @@ FILE *logfd = NULL; // дескриптор файла журнала
 
 // Функция для обработки сигналов, приводящих к аварийному завершению процесса
 void signal_handler(int signum) {
-    // Закрываем сокет и файл журнала
-    if (sockfd != -1) {
-        close(sockfd);
-    }
-    if (logfd != NULL) {
-        fclose(logfd);
-    }
     // Выводим сообщение об ошибке в зависимости от типа сигнала
     switch (signum) {
         case SIGINT:
@@ -56,14 +48,7 @@ void signal_handler(int signum) {
 }
 
 // Функция для обработки таймера неактивности клиентской стороны
-void timeout_handler(int signum) {
-    // Закрываем сокет и файл журнала
-    if (sockfd != -1) {
-        close(sockfd);
-    }
-    if (logfd != NULL) {
-        fclose(logfd);
-    }
+void timeout_handler() {
     // Выводим сообщение об ошибке
     fprintf(stderr, "Превышено время ожидания сообщений от клиента.\n");
 
@@ -75,7 +60,7 @@ void timeout_handler(int signum) {
 void parse_args(int argc, char *argv[]) {
     int opt;
     // Опции для getopt
-    const char *optstring = "l:t:v";
+    const char *optstring = "l:t:";
     // Парсим аргументы с помощью getopt
     while ((opt = getopt(argc, argv, optstring)) != -1) {
         switch (opt) {
@@ -85,11 +70,8 @@ void parse_args(int argc, char *argv[]) {
             case 't': // время ожидания сообщений от клиента
                 timeout = atoi(optarg);
                 break;
-            case 'v': // флаг для вывода дополнительной информации
-                verbose = 1;
-                break;
             default: // неверный аргумент
-                fprintf(stderr, "Использование: %s [-l log_file] [-t timeout] [-v]\n", argv[0]);
+                fprintf(stderr, "Использование: %s [-l log_file] [-t timeout]\n", argv[0]);
                 exit(1);
         }
     }
@@ -215,18 +197,11 @@ int main(int argc, char *argv[]) {
         write_log("Пакет длиной %d байтов\n", numbytes);
         printf("Пакет содержит \"%s\"\n", buffer);
         write_log("Пакет содержит \"%s\"\n", buffer);
-        // Если включен флаг verbose, то выводим дополнительную информацию о запросе
-        if (verbose) {
-            printf("Дополнительная информация:\n");
-            write_log("Дополнительная информация:\n");
-            // TODO: добавить функцию для вывода дополнительной информации о запросе
-        }
         double a, b, c, d;
-        int n;
-        n = sscanf(buffer, "%lf %lf %lf %lf", &a, &b, &c, &d);
-        if (n == 3) { // квадратное уравнение
+        sscanf(buffer, "%lf %lf %lf %lf", &a, &b, &c, &d);
+        if (d == 0) { // квадратное уравнение
             SolveQuadratic(a, b, c); // решаем квадратное уравнение и выводим результаты
-        } else if (n == 4) { // кубическое уравнение
+        } else if (d != 0) { // кубическое уравнение
             SolveCubic(a, b, c, d); // решаем кубическое уравнение и выводим разложение на множители
         } else { // неверный формат запроса
             printf("Неверный формат запроса.\n");

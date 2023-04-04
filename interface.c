@@ -7,19 +7,28 @@
 #include "interface.h"
 
 // Функция для обработки коэффициентов уравнения из командной строки
-int ProcessCoefficients(int argc, char* argv[], double* a, double* b,
-                        double* c, double* d)
-{
+int
+ParseArgs(int argc, char *argv[], char **log_file, int *timeout, double *a,
+          double *b, double *c,
+          double *d) {
     // Объявляем переменную для хранения кода возврата функции getopt
     int opt;
 
+    // Проверяем количество аргументов командной строки
 
+    // Проверяем, что аргументов 7, 9, 11, 13
+    if (argc != 7 && argc != 9 && argc != 11 && argc != 13) {
+        fprintf(stderr,
+                "Использование: ./client [-l log_file] [-t timeout] "
+                "-a a -b b -c c [-d d]\n");
+        return -1;
+    }
 
     // Объявляем указатели на конец чисел
-    char* endptrA;
-    char* endptrB;
-    char* endptrC;
-    char* endptrD;
+    char *endptrA;
+    char *endptrB;
+    char *endptrC;
+    char *endptrD;
 
     // Объявляем переменные-флаги для проверки повторения опций
     int aFlag = 0;
@@ -32,20 +41,24 @@ int ProcessCoefficients(int argc, char* argv[], double* a, double* b,
     //  указатель на первый символ, который не является частью числа.
     //  Если этот символ не равен нулевому символу ‘\0’, то это означает,
     //  что строка содержит неверный формат числа.
-    while ((opt = getopt(argc, argv, "a:b:c:d:")) != -1)
-    {
-        switch (opt)
-        {
+    while ((opt = getopt(argc, argv, "a:b:c:d:t:l:")) != -1) {
+        switch (opt) {
+            case 'l':
+                // Имя файла журнала
+                *log_file = optarg;
+                break;
+            case 't':
+                // Время ожидания ввода пользователя
+                *timeout = atoi(optarg);
+                break;
             case 'a':
                 // Проверяем флаг a
-                if (aFlag == 1)
-                {
+                if (aFlag == 1) {
                     // Опция a повторяется
-                    fprintf(stderr, "Опция -a не может быть указана более одного раза.\n");
+                    fprintf(stderr,
+                            "Опция -a не может быть указана более одного раза.\n");
                     return -1;
-                }
-                else
-                {
+                } else {
                     // Опция a встречается в первый раз
                     aFlag = 1; // Устанавливаем флаг a в 1
                 }
@@ -53,8 +66,7 @@ int ProcessCoefficients(int argc, char* argv[], double* a, double* b,
                 *a = strtod(optarg,
                             &endptrA); // Присваиваем значение и адрес конца числа
                 if (*endptrA !=
-                    '\0')
-                {
+                    '\0') {
                     // Проверяем, что строка заканчивается нулевым символом
                     fprintf(stderr, "Неверный формат числа для опции -a.\n");
                     return -1;
@@ -62,14 +74,12 @@ int ProcessCoefficients(int argc, char* argv[], double* a, double* b,
                 break;
             case 'b':
                 // Проверяем флаг b
-                if (bFlag == 1)
-                {
+                if (bFlag == 1) {
                     // Опция b повторяется
-                    fprintf(stderr, "Опция -b не может быть указана более одного раза.\n");
+                    fprintf(stderr,
+                            "Опция -b не может быть указана более одного раза.\n");
                     return -1;
-                }
-                else
-                {
+                } else {
                     // Опция b встречается в первый раз
                     bFlag = 1; // Устанавливаем флаг b в 1
                 }
@@ -78,8 +88,7 @@ int ProcessCoefficients(int argc, char* argv[], double* a, double* b,
                 *b = strtod(optarg,
                             &endptrB); // Присваиваем значение и адрес конца числа
                 if (*endptrB !=
-                    '\0')
-                {
+                    '\0') {
                     // Проверяем, что строка заканчивается нулевым символом
                     fprintf(stderr, "Неверный формат числа для опции -b.\n");
                     return -1;
@@ -87,14 +96,12 @@ int ProcessCoefficients(int argc, char* argv[], double* a, double* b,
                 break;
             case 'c':
                 // Проверяем флаг c
-                if (cFlag == 1)
-                {
+                if (cFlag == 1) {
                     // Опция c повторяется
-                    fprintf(stderr, "Опция -c не может быть указана более одного раза.\n");
+                    fprintf(stderr,
+                            "Опция -c не может быть указана более одного раза.\n");
                     return -1;
-                }
-                else
-                {
+                } else {
                     // Опция c встречается в первый раз
                     cFlag = 1; // Устанавливаем флаг c в 1
                 }
@@ -103,8 +110,7 @@ int ProcessCoefficients(int argc, char* argv[], double* a, double* b,
                 *c = strtod(optarg,
                             &endptrC); // Присваиваем значение и адрес конца числа
                 if (*endptrC !=
-                    '\0')
-                {
+                    '\0') {
                     // Проверяем, что строка заканчивается нулевым символом
                     fprintf(stderr, "Неверный формат числа для опции -c.\n");
                     return -1;
@@ -112,14 +118,12 @@ int ProcessCoefficients(int argc, char* argv[], double* a, double* b,
                 break;
             case 'd': // Добавляем опцию -d для четвертого коэффициента
                 // Проверяем флаг d
-                if (dFlag == 1)
-                {
+                if (dFlag == 1) {
                     // Опция d повторяется
-                    fprintf(stderr, "Опция -d не может быть указана более одного раза.\n");
+                    fprintf(stderr,
+                            "Опция -d не может быть указана более одного раза.\n");
                     return -1;
-                }
-                else
-                {
+                } else {
                     // Опция d встречается в первый раз
                     dFlag = 1; // Устанавливаем флаг d в 1
                 }
@@ -127,8 +131,7 @@ int ProcessCoefficients(int argc, char* argv[], double* a, double* b,
                 *d = strtod(optarg,
                             &endptrD); // Присваиваем значение и адрес конца числа
                 if (*endptrD !=
-                    '\0')
-                {
+                    '\0') {
                     // Проверяем, что строка заканчивается нулевым символом
                     fprintf(stderr,
                             "Неверный формат числа для опции -d.\n");
@@ -137,7 +140,8 @@ int ProcessCoefficients(int argc, char* argv[], double* a, double* b,
                 break;
             default:
                 fprintf(stderr,
-                        "Использование: ./client -a a -b b -c c [-d d]\n");
+                        "Использование: ./client [-l log_file] "
+                        "[-t timeout] -a a -b b -c c [-d d]\n");
                 return -1;
         }
     }

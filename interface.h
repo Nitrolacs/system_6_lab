@@ -20,8 +20,10 @@
  * \return Код ошибки
  */
 int
-ParseArgs(int argc, char* argv[], char** log_file, int* timeout, double* a,
+ParseArgsClient(int argc, char* argv[], char** log_file, int* timeout, double* a,
           double* b, double* c,
           double* d);
+
+void parseArgsServer(int argc, char *argv[], char **log_file, int *timeout);
 
 #endif //INC_5_LAB_INTERFACE_H

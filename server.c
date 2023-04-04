@@ -7,134 +7,14 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
-#include <getopt.h>
-#include <time.h>
-#include <stdarg.h>
 
 #include "server.h"
 #include "logic.h"
+#include "interface.h"
+#include "signals.h"
 
 #define PORT 5555
 #define MAXBUF 1024
-
-
-// Глобальные переменные для хранения аргументов командной строки
-char* log_file = NULL; // имя файла журнала
-int timeout = 0; // время ожидания сообщений от клиента в секундах
-
-// Глобальные переменные для хранения дескрипторов сокета и файла журнала
-int sockfd = -1; // дескриптор сокета
-FILE *logfd = NULL; // дескриптор файла журнала
-
-// Функция для обработки сигналов, приводящих к аварийному завершению процесса
-void signal_handler(int signum) {
-    // Выводим сообщение об ошибке в зависимости от типа сигнала
-    switch (signum) {
-        case SIGINT:
-            fprintf(stderr, "Программа прервана пользователем.\n");
-            break;
-        case SIGTERM:
-            fprintf(stderr, "Программа завершена системой.\n");
-            break;
-        case SIGSEGV:
-            fprintf(stderr, "Программа вызвала ошибку сегментации.\n");
-            break;
-        default:
-            fprintf(stderr, "Программа завершена неизвестным сигналом.\n");
-            break;
-    }
-    // Выходим из программы с кодом ошибки
-    exit(1);
-}
-
-// Функция для обработки таймера неактивности клиентской стороны
-void timeout_handler() {
-    // Выводим сообщение об ошибке
-    fprintf(stderr, "Превышено время ожидания сообщений от клиента.\n");
-
-    // Выходим из программы с кодом ошибки
-    exit(1);
-}
-
-// Функция для разбора аргументов командной строки
-void parse_args(int argc, char *argv[]) {
-    int opt;
-    // Опции для getopt
-    const char *optstring = "l:t:";
-    // Парсим аргументы с помощью getopt
-    while ((opt = getopt(argc, argv, optstring)) != -1) {
-        switch (opt) {
-            case 'l': // имя файла журнала
-                log_file = optarg;
-                break;
-            case 't': // время ожидания сообщений от клиента
-                timeout = atoi(optarg);
-                break;
-            default: // неверный аргумент
-                fprintf(stderr, "Использование: %s [-l log_file] [-t timeout]\n", argv[0]);
-                exit(1);
-        }
-    }
-}
-
-// Функция для открытия файла журнала для записи или создания его, если он не существует
-void open_log() {
-    // Если имя файла журнала не задано, то используем стандартное имя
-    if (log_file == NULL) {
-        log_file = "server.log";
-    }
-    // Открываем файл журнала для записи или создаем его, если он не существует
-    logfd = fopen(log_file, "a");
-    // Проверяем на ошибки
-    if (logfd == NULL) {
-        perror("fopen");
-        exit(1);
-    }
-}
-
-// Функция для записи сообщений в файл журнала с помощью fprintf
-void write_log(const char *format, ...) {
-    // Проверяем, что файл журнала открыт
-    if (logfd == NULL) {
-        return;
-    }
-    // Получаем текущее время и форматируем его в строку
-    time_t t = time(NULL);
-    struct tm *tm = localtime(&t);
-    char time_str[20];
-    strftime(time_str, 20, "%Y-%m-%d %H:%M:%S", tm);
-    // Выводим время в файл журнала
-    fprintf(logfd, "[%s] ", time_str);
-
-    // Этот код позволяет записывать разные сообщения в файл журнала
-    // с помощью одной функции write_log.
-
-    // Выводим сообщение в файл журнала с помощью переменного числа аргументов
-    va_list args;  // информация о списке аргументов.
-    // Инициализировать переменную args с помощью макроса va_start, передав
-    // ей последний известный параметр функции write_log. В данном случае,
-    // это параметр format, который содержит формат сообщения.
-    va_start(args, format);
-    // Первым параметром vfprintf является дескриптор файла журнала logfd,
-    // вторым - формат сообщения format, третьим - список аргументов args.
-    vfprintf(logfd, format, args);
-    // Освобождаем ресурсы, связанные со списком аргументов args, с 
-    // помощью макроса va_end.
-    va_end(args);
-}
-
-// Функция для установки таймера неактивности клиентской стороны с помощью alarm и signal
-void set_timer() {
-    // Проверяем, что время ожидания задано
-    if (timeout > 0) {
-        // Устанавливаем таймер с помощью alarm
-        alarm(timeout);
-        // Устанавливаем обработчик сигнала SIGALRM
-        signal(SIGALRM, timeout_handler);
-    }
-}
-
-
 
 // Главная функция сервера
 int main(int argc, char *argv[]) {
@@ -143,11 +23,19 @@ int main(int argc, char *argv[]) {
     char buffer[MAXBUF];
     socklen_t len;
 
+    char* log_file = NULL; // имя файла журнала
+    int timeout = 0; // время ожидания сообщений от клиента в секундах
+
     // Разбираем аргументы командной строки
-    parse_args(argc, argv);
+    parseArgsServer(argc, argv, &log_file, &timeout);
+
+    int sockfd = -1; // дескриптор сокета
+    FILE *logfd = NULL; // дескриптор файла журнала
+
+    char* logFileName = "server.log";
 
     // Открываем файл журнала
-    open_log();
+    openLog(&log_file, &logfd, logFileName);
 
     // Создаем сокет
     sockfd = socket(AF_INET, SOCK_DGRAM, 0);
@@ -171,16 +59,16 @@ int main(int argc, char *argv[]) {
 
     // Выводим информацию о сервере на экран и в файл журнала
     printf("Сервер слушает на %s:%d\n", inet_ntoa(servaddr.sin_addr), ntohs(servaddr.sin_port));
-    write_log("Сервер слушает на %s:%d\n", inet_ntoa(servaddr.sin_addr), ntohs(servaddr.sin_port));
+    writeLog(logfd, "Сервер слушает на %s:%d\n", inet_ntoa(servaddr.sin_addr), ntohs(servaddr.sin_port));
 
     // Устанавливаем обработчики сигналов SIGINT, SIGTERM и SIGSEGV
-    signal(SIGINT, signal_handler);
-    signal(SIGTERM, signal_handler);
-    signal(SIGSEGV, signal_handler);
+    signal(SIGINT, signalHandler);
+    signal(SIGTERM, signalHandler);
+    signal(SIGSEGV, signalHandler);
     // Входим в бесконечный цикл обработки запросов от клиентов
     while (1) {
         // Устанавливаем таймер неактивности клиентской стороны
-        set_timer();
+        setTimer(timeout);
         // Принимаем данные от клиента и запоминаем его адрес в cliaddr
         len = sizeof(cliaddr); // длина адреса клиента
         numbytes = recvfrom(sockfd, buffer, MAXBUF, 0, (struct sockaddr *) &cliaddr, &len);
@@ -192,11 +80,11 @@ int main(int argc, char *argv[]) {
         buffer[numbytes] = '\0'; // добавляем нулевой символ в конец сообщения
         // Выводим информацию о клиенте и его запросе на экран и в файл журнала
         printf("Получен запрос от %s:%d\n", inet_ntoa(cliaddr.sin_addr), ntohs(cliaddr.sin_port));
-        write_log("Получен запрос от %s:%d\n", inet_ntoa(cliaddr.sin_addr), ntohs(cliaddr.sin_port));
+        writeLog(logfd,"Получен запрос от %s:%d\n", inet_ntoa(cliaddr.sin_addr), ntohs(cliaddr.sin_port));
         printf("Пакет длиной %d байтов\n", numbytes);
-        write_log("Пакет длиной %d байтов\n", numbytes);
+        writeLog(logfd,"Пакет длиной %d байтов\n", numbytes);
         printf("Пакет содержит \"%s\"\n", buffer);
-        write_log("Пакет содержит \"%s\"\n", buffer);
+        writeLog(logfd,"Пакет содержит \"%s\"\n", buffer);
         double a, b, c, d;
         sscanf(buffer, "%lf %lf %lf %lf", &a, &b, &c, &d);
         if (d == 0) { // квадратное уравнение
@@ -205,8 +93,7 @@ int main(int argc, char *argv[]) {
             SolveCubic(a, b, c, d); // решаем кубическое уравнение и выводим разложение на множители
         } else { // неверный формат запроса
             printf("Неверный формат запроса.\n");
-            write_log("Неверный формат запроса.\n");
+            writeLog(logfd, "Неверный формат запроса.\n");
         }
     }
-    return 0;
 }

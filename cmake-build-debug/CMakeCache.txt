@@ -23,6 +23,15 @@
 //Value Computed by CMake
 5_lab_SOURCE_DIR:STATIC=/media/sf_VM_EXCHANGE/system_programming/6_lab
 
+//Value Computed by CMake
+6_lab_BINARY_DIR:STATIC=/media/sf_VM_EXCHANGE/system_programming/6_lab/cmake-build-debug
+
+//Value Computed by CMake
+6_lab_IS_TOP_LEVEL:STATIC=ON
+
+//Value Computed by CMake
+6_lab_SOURCE_DIR:STATIC=/media/sf_VM_EXCHANGE/system_programming/6_lab
+
 //Path to a program.
 CMAKE_ADDR2LINE:FILEPATH=/usr/bin/addr2line
 
@@ -131,7 +140,7 @@ CMAKE_PROJECT_DESCRIPTION:STATIC=
 CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=5_lab
+CMAKE_PROJECT_NAME:STATIC=6_lab
 
 //Path to a program.
 CMAKE_RANLIB:FILEPATH=/usr/bin/ranlib

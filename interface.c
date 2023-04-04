@@ -8,9 +8,10 @@
 
 // Функция для обработки коэффициентов уравнения из командной строки
 int
-ParseArgs(int argc, char *argv[], char **log_file, int *timeout, double *a,
-          double *b, double *c,
-          double *d) {
+ParseArgsClient(int argc, char *argv[], char **log_file, int *timeout,
+                double *a,
+                double *b, double *c,
+                double *d) {
     // Объявляем переменную для хранения кода возврата функции getopt
     int opt;
 
@@ -154,4 +155,25 @@ ParseArgs(int argc, char *argv[], char **log_file, int *timeout, double *a,
 
     // Возвращаем код успеха
     return 0;
+}
+
+// Функция для разбора аргументов командной строки
+void parseArgsServer(int argc, char *argv[], char **log_file, int *timeout) {
+    int opt;
+    // Опции для getopt
+    const char *optstring = "l:t:";
+    // Парсим аргументы с помощью getopt
+    while ((opt = getopt(argc, argv, optstring)) != -1) {
+        switch (opt) {
+            case 'l': // имя файла журнала
+                *log_file = optarg;
+                break;
+            case 't': // время ожидания сообщений от клиента
+                *timeout = atoi(optarg);
+                break;
+            default: // неверный аргумент
+                fprintf(stderr, "Использование: %s [-l log_file] [-t timeout]\n", argv[0]);
+                exit(1);
+        }
+    }
 }

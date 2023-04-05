@@ -83,22 +83,25 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Функции</h2></td></tr>
-<tr class="memitem:a1ce222c8d4f62115122eb058659f575c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8h.html#a1ce222c8d4f62115122eb058659f575c">ProcessCoefficients</a> (int argc, char *argv[], double *a, double *b, double *c, double *d)</td></tr>
-<tr class="memdesc:a1ce222c8d4f62115122eb058659f575c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Выводит меню программы  <br /></td></tr>
-<tr class="separator:a1ce222c8d4f62115122eb058659f575c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2fca57bc6a1a55b602f1516e95e0fcdd"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8h.html#a2fca57bc6a1a55b602f1516e95e0fcdd">ParseArgsClient</a> (int argc, char *argv[], char **logFile, int *timeout, double *a, double *b, double *c, double *d)</td></tr>
+<tr class="memdesc:a2fca57bc6a1a55b602f1516e95e0fcdd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Разбирает аргументы командной строки  <br /></td></tr>
+<tr class="separator:a2fca57bc6a1a55b602f1516e95e0fcdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a245b690e0319f33100bf5cc74967247b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_8h.html#a245b690e0319f33100bf5cc74967247b">parseArgsServer</a> (int argc, char *argv[], char **logFile, int *timeout)</td></tr>
+<tr class="memdesc:a245b690e0319f33100bf5cc74967247b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Разбирает аргументы командной строки  <br /></td></tr>
+<tr class="separator:a245b690e0319f33100bf5cc74967247b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
 <div class="textblock"><p>Заголовочный файл с описанием функций </p>
-<p>Данный файл содержит в себе определение основной функции, используемой для обработки параметров командной строки (CLI). </p>
+<p>Данный файл содержит в себе определение основных функций, используемых для обработки параметров командной строки (CLI). </p>
 </div><h2 class="groupheader">Функции</h2>
-<a id="a1ce222c8d4f62115122eb058659f575c" name="a1ce222c8d4f62115122eb058659f575c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1ce222c8d4f62115122eb058659f575c">&#9670;&#160;</a></span>ProcessCoefficients()</h2>
+<a id="a2fca57bc6a1a55b602f1516e95e0fcdd" name="a2fca57bc6a1a55b602f1516e95e0fcdd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2fca57bc6a1a55b602f1516e95e0fcdd">&#9670;&#160;</a></span>ParseArgsClient()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int ProcessCoefficients </td>
+          <td class="memname">int ParseArgsClient </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>argc</em>, </td>
@@ -108,6 +111,18 @@ $(function() {
           <td></td>
           <td class="paramtype">char *&#160;</td>
           <td class="paramname"><em>argv</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char **&#160;</td>
+          <td class="paramname"><em>logFile</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>timeout</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -141,11 +156,13 @@ $(function() {
       </table>
 </div><div class="memdoc">
 
-<p>Выводит меню программы </p>
+<p>Разбирает аргументы командной строки </p>
 <dl class="params"><dt>Аргументы</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">argc</td><td>Количество аргументов командной строки </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">argv</td><td>Массив указателей на строки, содержащие аргументы </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">logFile</td><td>Указатель на название log файла </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">logFile</td><td>Указатель на время ожидания </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">a</td><td>Указатель на первый коэффициент </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">b</td><td>Указатель на второй коэффициент </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">c</td><td>Указатель на третий коэффициент </td></tr>
@@ -154,7 +171,58 @@ $(function() {
   </dd>
 </dl>
 <dl class="section return"><dt>Возвращает</dt><dd>Код ошибки</dd></dl>
-<p>Функция интерфейса </p>
+<p>Функции интерфейса CLI </p>
+
+</div>
+</div>
+<a id="a245b690e0319f33100bf5cc74967247b" name="a245b690e0319f33100bf5cc74967247b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a245b690e0319f33100bf5cc74967247b">&#9670;&#160;</a></span>parseArgsServer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void parseArgsServer </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>argc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>argv</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char **&#160;</td>
+          <td class="paramname"><em>logFile</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>timeout</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Разбирает аргументы командной строки </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">argc</td><td>Количество аргументов командной строки </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">argv</td><td>Массив указателей на строки, содержащие аргументы </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">logFile</td><td>Указатель на название log файла </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">logFile</td><td>Указатель на время ожидания </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

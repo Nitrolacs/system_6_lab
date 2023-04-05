@@ -1,0 +1,93 @@
+\hypertarget{signals_8h}{}\doxysection{Файл signals.\+h}
+\label{signals_8h}\index{signals.h@{signals.h}}
+
+
+Заголовочный файл с описанием функций  
+
+
+\doxysubsection*{Функции}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{signals_8h_a8ee3282bc313e547dbbb8d4f4010db61}{signal\+Handler}} (int signum)
+\begin{DoxyCompactList}\small\item\em Функция для обработки сигналов, приводящих к завершению процесса \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{signals_8h_a115b5c90b59f7381736dbdd60c2cb2ff}\label{signals_8h_a115b5c90b59f7381736dbdd60c2cb2ff}} 
+void {\bfseries timeout\+Handler} ()
+\begin{DoxyCompactList}\small\item\em Функция для обработки таймера неактивности пользователя \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{signals_8h_ac2b252f73db460a4c393f7bc26c375c2}{open\+Log}} (char $\ast$$\ast$log\+File, char $\ast$log\+File\+Name)
+\begin{DoxyCompactList}\small\item\em Функция для открытия файла журнала для записи или создания его \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{signals_8h_a4a910c2b977b8cfa71448e92c5ee8d46}{write\+Log}} (const char $\ast$format,...)
+\begin{DoxyCompactList}\small\item\em Функция для записи сообщений в файл журнала с помощью fprintf. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{signals_8h_a613a616a6735b234cc0ca664eaa31579}{set\+Timer}} (int timeout)
+\begin{DoxyCompactList}\small\item\em Функция для установки таймера неактивности пользователя \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Подробное описание}
+Заголовочный файл с описанием функций 
+
+Данный файл содержит в себе определение основных функций, используемых для обработки сигналов и настройки таймера. 
+
+\doxysubsection{Функции}
+\mbox{\Hypertarget{signals_8h_ac2b252f73db460a4c393f7bc26c375c2}\label{signals_8h_ac2b252f73db460a4c393f7bc26c375c2}} 
+\index{signals.h@{signals.h}!openLog@{openLog}}
+\index{openLog@{openLog}!signals.h@{signals.h}}
+\doxysubsubsection{\texorpdfstring{openLog()}{openLog()}}
+{\footnotesize\ttfamily void open\+Log (\begin{DoxyParamCaption}\item[{char $\ast$$\ast$}]{log\+File,  }\item[{char $\ast$}]{log\+File\+Name }\end{DoxyParamCaption})}
+
+
+
+Функция для открытия файла журнала для записи или создания его 
+
+
+\begin{DoxyParams}[1]{Аргументы}
+\mbox{\texttt{ in}}  & {\em log\+File} & Указатель на файл \\
+\hline
+\mbox{\texttt{ in}}  & {\em log\+File} & Название файла \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{signals_8h_a613a616a6735b234cc0ca664eaa31579}\label{signals_8h_a613a616a6735b234cc0ca664eaa31579}} 
+\index{signals.h@{signals.h}!setTimer@{setTimer}}
+\index{setTimer@{setTimer}!signals.h@{signals.h}}
+\doxysubsubsection{\texorpdfstring{setTimer()}{setTimer()}}
+{\footnotesize\ttfamily void set\+Timer (\begin{DoxyParamCaption}\item[{int}]{timeout }\end{DoxyParamCaption})}
+
+
+
+Функция для установки таймера неактивности пользователя 
+
+
+\begin{DoxyParams}[1]{Аргументы}
+\mbox{\texttt{ in}}  & {\em timeout} & Время ожидания \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{signals_8h_a8ee3282bc313e547dbbb8d4f4010db61}\label{signals_8h_a8ee3282bc313e547dbbb8d4f4010db61}} 
+\index{signals.h@{signals.h}!signalHandler@{signalHandler}}
+\index{signalHandler@{signalHandler}!signals.h@{signals.h}}
+\doxysubsubsection{\texorpdfstring{signalHandler()}{signalHandler()}}
+{\footnotesize\ttfamily void signal\+Handler (\begin{DoxyParamCaption}\item[{int}]{signum }\end{DoxyParamCaption})}
+
+
+
+Функция для обработки сигналов, приводящих к завершению процесса 
+
+
+\begin{DoxyParams}[1]{Аргументы}
+\mbox{\texttt{ in}}  & {\em signum} & Номер (тип) сигнала \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{signals_8h_a4a910c2b977b8cfa71448e92c5ee8d46}\label{signals_8h_a4a910c2b977b8cfa71448e92c5ee8d46}} 
+\index{signals.h@{signals.h}!writeLog@{writeLog}}
+\index{writeLog@{writeLog}!signals.h@{signals.h}}
+\doxysubsubsection{\texorpdfstring{writeLog()}{writeLog()}}
+{\footnotesize\ttfamily void write\+Log (\begin{DoxyParamCaption}\item[{const char $\ast$}]{format,  }\item[{}]{... }\end{DoxyParamCaption})}
+
+
+
+Функция для записи сообщений в файл журнала с помощью fprintf. 
+
+
+\begin{DoxyParams}[1]{Аргументы}
+\mbox{\texttt{ in}}  & {\em format} & Формат сообщения \\
+\hline
+\mbox{\texttt{ in}}  & {\em ...} & Остальные параметры \\
+\hline
+\end{DoxyParams}

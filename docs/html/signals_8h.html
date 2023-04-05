@@ -1,0 +1,239 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.6"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Client-Server: Файл signals.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Client-Server<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">Клиент-Сервер</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.6 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Функции</a>  </div>
+  <div class="headertitle"><div class="title">Файл signals.h</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Заголовочный файл с описанием функций  
+<a href="#details">Подробнее...</a></p>
+
+<p><a href="signals_8h_source.html">См. исходные тексты.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Функции</h2></td></tr>
+<tr class="memitem:a8ee3282bc313e547dbbb8d4f4010db61"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="signals_8h.html#a8ee3282bc313e547dbbb8d4f4010db61">signalHandler</a> (int signum)</td></tr>
+<tr class="memdesc:a8ee3282bc313e547dbbb8d4f4010db61"><td class="mdescLeft">&#160;</td><td class="mdescRight">Функция для обработки сигналов, приводящих к завершению процесса  <br /></td></tr>
+<tr class="separator:a8ee3282bc313e547dbbb8d4f4010db61"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a115b5c90b59f7381736dbdd60c2cb2ff"><td class="memItemLeft" align="right" valign="top"><a id="a115b5c90b59f7381736dbdd60c2cb2ff" name="a115b5c90b59f7381736dbdd60c2cb2ff"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>timeoutHandler</b> ()</td></tr>
+<tr class="memdesc:a115b5c90b59f7381736dbdd60c2cb2ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Функция для обработки таймера неактивности пользователя <br /></td></tr>
+<tr class="separator:a115b5c90b59f7381736dbdd60c2cb2ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2b252f73db460a4c393f7bc26c375c2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="signals_8h.html#ac2b252f73db460a4c393f7bc26c375c2">openLog</a> (char **logFile, char *logFileName)</td></tr>
+<tr class="memdesc:ac2b252f73db460a4c393f7bc26c375c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Функция для открытия файла журнала для записи или создания его  <br /></td></tr>
+<tr class="separator:ac2b252f73db460a4c393f7bc26c375c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a910c2b977b8cfa71448e92c5ee8d46"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="signals_8h.html#a4a910c2b977b8cfa71448e92c5ee8d46">writeLog</a> (const char *format,...)</td></tr>
+<tr class="memdesc:a4a910c2b977b8cfa71448e92c5ee8d46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Функция для записи сообщений в файл журнала с помощью fprintf.  <br /></td></tr>
+<tr class="separator:a4a910c2b977b8cfa71448e92c5ee8d46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a613a616a6735b234cc0ca664eaa31579"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="signals_8h.html#a613a616a6735b234cc0ca664eaa31579">setTimer</a> (int timeout)</td></tr>
+<tr class="memdesc:a613a616a6735b234cc0ca664eaa31579"><td class="mdescLeft">&#160;</td><td class="mdescRight">Функция для установки таймера неактивности пользователя  <br /></td></tr>
+<tr class="separator:a613a616a6735b234cc0ca664eaa31579"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>Заголовочный файл с описанием функций </p>
+<p>Данный файл содержит в себе определение основных функций, используемых для обработки сигналов и настройки таймера. </p>
+</div><h2 class="groupheader">Функции</h2>
+<a id="ac2b252f73db460a4c393f7bc26c375c2" name="ac2b252f73db460a4c393f7bc26c375c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac2b252f73db460a4c393f7bc26c375c2">&#9670;&#160;</a></span>openLog()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void openLog </td>
+          <td>(</td>
+          <td class="paramtype">char **&#160;</td>
+          <td class="paramname"><em>logFile</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>logFileName</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Функция для открытия файла журнала для записи или создания его </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">logFile</td><td>Указатель на файл </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">logFile</td><td>Название файла </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a613a616a6735b234cc0ca664eaa31579" name="a613a616a6735b234cc0ca664eaa31579"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a613a616a6735b234cc0ca664eaa31579">&#9670;&#160;</a></span>setTimer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setTimer </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>timeout</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Функция для установки таймера неактивности пользователя </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">timeout</td><td>Время ожидания </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a8ee3282bc313e547dbbb8d4f4010db61" name="a8ee3282bc313e547dbbb8d4f4010db61"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ee3282bc313e547dbbb8d4f4010db61">&#9670;&#160;</a></span>signalHandler()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void signalHandler </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>signum</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Функция для обработки сигналов, приводящих к завершению процесса </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">signum</td><td>Номер (тип) сигнала </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a4a910c2b977b8cfa71448e92c5ee8d46" name="a4a910c2b977b8cfa71448e92c5ee8d46"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a910c2b977b8cfa71448e92c5ee8d46">&#9670;&#160;</a></span>writeLog()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void writeLog </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>format</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Функция для записи сообщений в файл журнала с помощью fprintf. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">format</td><td>Формат сообщения </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">...</td><td>Остальные параметры </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6
+</small></address>
+</body>
+</html>

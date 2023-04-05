@@ -77,12 +77,16 @@ $(function() {
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#ifndef INC_5_LAB_INTERFACE_H</span></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#define INC_5_LAB_INTERFACE_H</span></div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="keywordtype">int</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><a class="code hl_function" href="interface_8h.html#a1ce222c8d4f62115122eb058659f575c">ProcessCoefficients</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>* argv[], <span class="keywordtype">double</span>* a, <span class="keywordtype">double</span>* b, <span class="keywordtype">double</span>* c,</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>                    <span class="keywordtype">double</span>* d);</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#endif </span><span class="comment">//INC_5_LAB_INTERFACE_H</span></div>
-<div class="ttc" id="ainterface_8h_html_a1ce222c8d4f62115122eb058659f575c"><div class="ttname"><a href="interface_8h.html#a1ce222c8d4f62115122eb058659f575c">ProcessCoefficients</a></div><div class="ttdeci">int ProcessCoefficients(int argc, char *argv[], double *a, double *b, double *c, double *d)</div><div class="ttdoc">Выводит меню программы</div><div class="ttdef"><b>Definition:</b> interface.c:10</div></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keywordtype">int</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><a class="code hl_function" href="interface_8h.html#a2fca57bc6a1a55b602f1516e95e0fcdd">ParseArgsClient</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>* argv[], <span class="keywordtype">char</span>** logFile, <span class="keywordtype">int</span>* timeout, <span class="keywordtype">double</span>* a,</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>          <span class="keywordtype">double</span>* b, <span class="keywordtype">double</span>* c,</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>          <span class="keywordtype">double</span>* d);</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="keywordtype">void</span> <a class="code hl_function" href="interface_8h.html#a245b690e0319f33100bf5cc74967247b">parseArgsServer</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>* argv[], <span class="keywordtype">char</span>** logFile, <span class="keywordtype">int</span>* timeout);</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="preprocessor">#endif </span><span class="comment">//INC_5_LAB_INTERFACE_H</span></div>
+<div class="ttc" id="ainterface_8h_html_a245b690e0319f33100bf5cc74967247b"><div class="ttname"><a href="interface_8h.html#a245b690e0319f33100bf5cc74967247b">parseArgsServer</a></div><div class="ttdeci">void parseArgsServer(int argc, char *argv[], char **logFile, int *timeout)</div><div class="ttdoc">Разбирает аргументы командной строки</div><div class="ttdef"><b>Definition:</b> interface.c:181</div></div>
+<div class="ttc" id="ainterface_8h_html_a2fca57bc6a1a55b602f1516e95e0fcdd"><div class="ttname"><a href="interface_8h.html#a2fca57bc6a1a55b602f1516e95e0fcdd">ParseArgsClient</a></div><div class="ttdeci">int ParseArgsClient(int argc, char *argv[], char **logFile, int *timeout, double *a, double *b, double *c, double *d)</div><div class="ttdoc">Разбирает аргументы командной строки</div><div class="ttdef"><b>Definition:</b> interface.c:11</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

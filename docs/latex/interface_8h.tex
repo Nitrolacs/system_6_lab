@@ -8,31 +8,37 @@
 \doxysubsection*{Функции}
 \begin{DoxyCompactItemize}
 \item 
-int \mbox{\hyperlink{interface_8h_a1ce222c8d4f62115122eb058659f575c}{Process\+Coefficients}} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]}, double $\ast$a, double $\ast$b, double $\ast$c, double $\ast$d)
-\begin{DoxyCompactList}\small\item\em Выводит меню программы \end{DoxyCompactList}\end{DoxyCompactItemize}
+int \mbox{\hyperlink{interface_8h_a2fca57bc6a1a55b602f1516e95e0fcdd}{Parse\+Args\+Client}} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]}, char $\ast$$\ast$log\+File, int $\ast$timeout, double $\ast$a, double $\ast$b, double $\ast$c, double $\ast$d)
+\begin{DoxyCompactList}\small\item\em Разбирает аргументы командной строки \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{interface_8h_a245b690e0319f33100bf5cc74967247b}{parse\+Args\+Server}} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]}, char $\ast$$\ast$log\+File, int $\ast$timeout)
+\begin{DoxyCompactList}\small\item\em Разбирает аргументы командной строки \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Подробное описание}
 Заголовочный файл с описанием функций 
 
-Данный файл содержит в себе определение основной функции, используемой для обработки параметров командной строки (CLI). 
+Данный файл содержит в себе определение основных функций, используемых для обработки параметров командной строки (CLI). 
 
 \doxysubsection{Функции}
-\mbox{\Hypertarget{interface_8h_a1ce222c8d4f62115122eb058659f575c}\label{interface_8h_a1ce222c8d4f62115122eb058659f575c}} 
-\index{interface.h@{interface.h}!ProcessCoefficients@{ProcessCoefficients}}
-\index{ProcessCoefficients@{ProcessCoefficients}!interface.h@{interface.h}}
-\doxysubsubsection{\texorpdfstring{ProcessCoefficients()}{ProcessCoefficients()}}
-{\footnotesize\ttfamily int Process\+Coefficients (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]},  }\item[{double $\ast$}]{a,  }\item[{double $\ast$}]{b,  }\item[{double $\ast$}]{c,  }\item[{double $\ast$}]{d }\end{DoxyParamCaption})}
+\mbox{\Hypertarget{interface_8h_a2fca57bc6a1a55b602f1516e95e0fcdd}\label{interface_8h_a2fca57bc6a1a55b602f1516e95e0fcdd}} 
+\index{interface.h@{interface.h}!ParseArgsClient@{ParseArgsClient}}
+\index{ParseArgsClient@{ParseArgsClient}!interface.h@{interface.h}}
+\doxysubsubsection{\texorpdfstring{ParseArgsClient()}{ParseArgsClient()}}
+{\footnotesize\ttfamily int Parse\+Args\+Client (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]},  }\item[{char $\ast$$\ast$}]{log\+File,  }\item[{int $\ast$}]{timeout,  }\item[{double $\ast$}]{a,  }\item[{double $\ast$}]{b,  }\item[{double $\ast$}]{c,  }\item[{double $\ast$}]{d }\end{DoxyParamCaption})}
 
 
 
-Выводит меню программы 
+Разбирает аргументы командной строки 
 
 
 \begin{DoxyParams}[1]{Аргументы}
 \mbox{\texttt{ in}}  & {\em argc} & Количество аргументов командной строки \\
 \hline
 \mbox{\texttt{ in}}  & {\em argv} & Массив указателей на строки, содержащие аргументы \\
+\hline
+\mbox{\texttt{ in}}  & {\em log\+File} & Указатель на название log файла \\
+\hline
+\mbox{\texttt{ in}}  & {\em log\+File} & Указатель на время ожидания \\
 \hline
 \mbox{\texttt{ in}}  & {\em a} & Указатель на первый коэффициент \\
 \hline
@@ -46,4 +52,24 @@ int \mbox{\hyperlink{interface_8h_a1ce222c8d4f62115122eb058659f575c}{Process\+Co
 \begin{DoxyReturn}{Возвращает}
 Код ошибки
 \end{DoxyReturn}
-Функция интерфейса 
+Функции интерфейса CLI \mbox{\Hypertarget{interface_8h_a245b690e0319f33100bf5cc74967247b}\label{interface_8h_a245b690e0319f33100bf5cc74967247b}} 
+\index{interface.h@{interface.h}!parseArgsServer@{parseArgsServer}}
+\index{parseArgsServer@{parseArgsServer}!interface.h@{interface.h}}
+\doxysubsubsection{\texorpdfstring{parseArgsServer()}{parseArgsServer()}}
+{\footnotesize\ttfamily void parse\+Args\+Server (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]},  }\item[{char $\ast$$\ast$}]{log\+File,  }\item[{int $\ast$}]{timeout }\end{DoxyParamCaption})}
+
+
+
+Разбирает аргументы командной строки 
+
+
+\begin{DoxyParams}[1]{Аргументы}
+\mbox{\texttt{ in}}  & {\em argc} & Количество аргументов командной строки \\
+\hline
+\mbox{\texttt{ in}}  & {\em argv} & Массив указателей на строки, содержащие аргументы \\
+\hline
+\mbox{\texttt{ in}}  & {\em log\+File} & Указатель на название log файла \\
+\hline
+\mbox{\texttt{ in}}  & {\em log\+File} & Указатель на время ожидания \\
+\hline
+\end{DoxyParams}

@@ -1,0 +1,26 @@
+Для сборки программы необходимо выполнить следующие команды\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{aclocal\ \ \#\ Эта\ команда\ создаст\ макрос\ aclocal.m4}
+\DoxyCodeLine{autoconf\ \ \#\ Создает\ configure\ из\ configure.ac}
+\DoxyCodeLine{automake\ -\/-\/add-\/missing\ \ \#\ Создает\ Makefile.in\ из\ Makefile.am}
+\DoxyCodeLine{./configure\ \ \#\ Проверяет\ наличие\ необходимых\ библиотек\ и\ устанавливает\ параметры\ сборки}
+\DoxyCodeLine{make\ \ \#\ Компилирует\ исходные\ файлы\ и\ создаёт\ исполняемый\ файл}
+
+\end{DoxyCode}
+ Для установки программы использовать следующую команду\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{make\ install\ \ \#\ Устанавливает\ программу\ в\ исходную\ директорию}
+
+\end{DoxyCode}
+ Для создания архива с исходным кодом программы необходимо использовать команду\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{make\ dist}
+
+\end{DoxyCode}
+ Эта команда соберет все необходимые файлы в один tar.\+gz файл с именем, основанным на имени и версии проекта. Для сборки документации использовать команду\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{doxygen}
+\DoxyCodeLine{firefox\ doxygen/html/index.html}
+
+\end{DoxyCode}
+ 

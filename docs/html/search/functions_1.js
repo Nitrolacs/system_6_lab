@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['processcoefficients_0',['ProcessCoefficients',['../interface_8h.html#a1ce222c8d4f62115122eb058659f575c',1,'interface.c']]]
+  ['openlog_0',['openLog',['../signals_8h.html#ac2b252f73db460a4c393f7bc26c375c2',1,'signals.c']]]
 ];

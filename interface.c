@@ -1,4 +1,4 @@
-/*! Функция интерфейса */
+/*! Функции интерфейса CLI */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -6,30 +6,31 @@
 
 #include "interface.h"
 
-// Функция для обработки коэффициентов уравнения из командной строки
+// Функция для обработки аргументов из командной строки для клиента
 int
-ParseArgsClient(int argc, char *argv[], char **log_file, int *timeout,
+ParseArgsClient(int argc, char *argv[], char **logFile, int *timeout,
                 double *a,
                 double *b, double *c,
-                double *d) {
+                double *d)
+                {
     // Объявляем переменную для хранения кода возврата функции getopt
     int opt;
 
     // Проверяем количество аргументов командной строки
-
     // Проверяем, что аргументов 7, 9, 11, 13
-    if (argc != 7 && argc != 9 && argc != 11 && argc != 13) {
+    if (argc != 7 && argc != 9 && argc != 11 && argc != 13)
+    {
         fprintf(stderr,
-                "Использование: ./client [-l log_file] [-t timeout] "
+                "Использование: ./client [-l logFile] [-t timeout] "
                 "-a a -b b -c c [-d d]\n");
         return -1;
     }
 
     // Объявляем указатели на конец чисел
-    char *endptrA;
-    char *endptrB;
-    char *endptrC;
-    char *endptrD;
+    char* endptrA;
+    char* endptrB;
+    char* endptrC;
+    char* endptrD;
 
     // Объявляем переменные-флаги для проверки повторения опций
     int aFlag = 0;
@@ -42,11 +43,13 @@ ParseArgsClient(int argc, char *argv[], char **log_file, int *timeout,
     //  указатель на первый символ, который не является частью числа.
     //  Если этот символ не равен нулевому символу ‘\0’, то это означает,
     //  что строка содержит неверный формат числа.
-    while ((opt = getopt(argc, argv, "a:b:c:d:t:l:")) != -1) {
-        switch (opt) {
+    while ((opt = getopt(argc, argv, "a:b:c:d:t:l:")) != -1)
+    {
+        switch (opt)
+        {
             case 'l':
                 // Имя файла журнала
-                *log_file = optarg;
+                *logFile = optarg;
                 break;
             case 't':
                 // Время ожидания ввода пользователя
@@ -54,12 +57,15 @@ ParseArgsClient(int argc, char *argv[], char **log_file, int *timeout,
                 break;
             case 'a':
                 // Проверяем флаг a
-                if (aFlag == 1) {
+                if (aFlag == 1)
+                {
                     // Опция a повторяется
                     fprintf(stderr,
                             "Опция -a не может быть указана более одного раза.\n");
                     return -1;
-                } else {
+                }
+                else
+                {
                     // Опция a встречается в первый раз
                     aFlag = 1; // Устанавливаем флаг a в 1
                 }
@@ -67,7 +73,8 @@ ParseArgsClient(int argc, char *argv[], char **log_file, int *timeout,
                 *a = strtod(optarg,
                             &endptrA); // Присваиваем значение и адрес конца числа
                 if (*endptrA !=
-                    '\0') {
+                    '\0')
+                {
                     // Проверяем, что строка заканчивается нулевым символом
                     fprintf(stderr, "Неверный формат числа для опции -a.\n");
                     return -1;
@@ -75,12 +82,15 @@ ParseArgsClient(int argc, char *argv[], char **log_file, int *timeout,
                 break;
             case 'b':
                 // Проверяем флаг b
-                if (bFlag == 1) {
+                if (bFlag == 1)
+                {
                     // Опция b повторяется
                     fprintf(stderr,
                             "Опция -b не может быть указана более одного раза.\n");
                     return -1;
-                } else {
+                }
+                else
+                {
                     // Опция b встречается в первый раз
                     bFlag = 1; // Устанавливаем флаг b в 1
                 }
@@ -89,7 +99,8 @@ ParseArgsClient(int argc, char *argv[], char **log_file, int *timeout,
                 *b = strtod(optarg,
                             &endptrB); // Присваиваем значение и адрес конца числа
                 if (*endptrB !=
-                    '\0') {
+                    '\0')
+                {
                     // Проверяем, что строка заканчивается нулевым символом
                     fprintf(stderr, "Неверный формат числа для опции -b.\n");
                     return -1;
@@ -97,12 +108,15 @@ ParseArgsClient(int argc, char *argv[], char **log_file, int *timeout,
                 break;
             case 'c':
                 // Проверяем флаг c
-                if (cFlag == 1) {
+                if (cFlag == 1)
+                {
                     // Опция c повторяется
                     fprintf(stderr,
                             "Опция -c не может быть указана более одного раза.\n");
                     return -1;
-                } else {
+                }
+                else
+                {
                     // Опция c встречается в первый раз
                     cFlag = 1; // Устанавливаем флаг c в 1
                 }
@@ -111,7 +125,8 @@ ParseArgsClient(int argc, char *argv[], char **log_file, int *timeout,
                 *c = strtod(optarg,
                             &endptrC); // Присваиваем значение и адрес конца числа
                 if (*endptrC !=
-                    '\0') {
+                    '\0')
+                {
                     // Проверяем, что строка заканчивается нулевым символом
                     fprintf(stderr, "Неверный формат числа для опции -c.\n");
                     return -1;
@@ -119,12 +134,15 @@ ParseArgsClient(int argc, char *argv[], char **log_file, int *timeout,
                 break;
             case 'd': // Добавляем опцию -d для четвертого коэффициента
                 // Проверяем флаг d
-                if (dFlag == 1) {
+                if (dFlag == 1)
+                {
                     // Опция d повторяется
                     fprintf(stderr,
                             "Опция -d не может быть указана более одного раза.\n");
                     return -1;
-                } else {
+                }
+                else
+                {
                     // Опция d встречается в первый раз
                     dFlag = 1; // Устанавливаем флаг d в 1
                 }
@@ -132,7 +150,8 @@ ParseArgsClient(int argc, char *argv[], char **log_file, int *timeout,
                 *d = strtod(optarg,
                             &endptrD); // Присваиваем значение и адрес конца числа
                 if (*endptrD !=
-                    '\0') {
+                    '\0')
+                {
                     // Проверяем, что строка заканчивается нулевым символом
                     fprintf(stderr,
                             "Неверный формат числа для опции -d.\n");
@@ -141,14 +160,15 @@ ParseArgsClient(int argc, char *argv[], char **log_file, int *timeout,
                 break;
             default:
                 fprintf(stderr,
-                        "Использование: ./client [-l log_file] "
+                        "Использование: ./client [-l logFile] "
                         "[-t timeout] -a a -b b -c c [-d d]\n");
                 return -1;
         }
     }
 
     // Проверяем, что коэффициенты уравнения не равны нулю или единице
-    if (*a == 0 || *a == 1 || *b == 0 || *b == 1 || *c == 0 || *c == 1) {
+    if (*a == 0 || *a == 1 || *b == 0 || *b == 1 || *c == 0 || *c == 1)
+    {
         fprintf(stderr, "Неверные коэффициенты.\n");
         return -1;
     }
@@ -157,22 +177,25 @@ ParseArgsClient(int argc, char *argv[], char **log_file, int *timeout,
     return 0;
 }
 
-// Функция для разбора аргументов командной строки
-void parseArgsServer(int argc, char *argv[], char **log_file, int *timeout) {
+// Функция для разбора аргументов командной строки сервера
+void parseArgsServer(int argc, char* argv[], char** logFile, int* timeout)
+{
     int opt;
     // Опции для getopt
-    const char *optstring = "l:t:";
+    const char* optstring = "l:t:";
     // Парсим аргументы с помощью getopt
-    while ((opt = getopt(argc, argv, optstring)) != -1) {
+    while ((opt = getopt(argc, argv, optstring)) != -1)
+    {
         switch (opt) {
             case 'l': // имя файла журнала
-                *log_file = optarg;
+                *logFile = optarg;
                 break;
             case 't': // время ожидания сообщений от клиента
                 *timeout = atoi(optarg);
                 break;
             default: // неверный аргумент
-                fprintf(stderr, "Использование: %s [-l log_file] [-t timeout]\n", argv[0]);
+                fprintf(stderr,
+                        "Использование: %s [-l logFile] [-t timeout]\n", argv[0]);
                 exit(1);
         }
     }

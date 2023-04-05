@@ -10,10 +10,11 @@
 
 FILE* logfd; // имя файла журнала
 
-// Функция для обработки сигналов, приводящих к аварийному завершению процесса
-void signalHandler(int signum) {
+void signalHandler(int signum)
+{
     // Выводим сообщение об ошибке в зависимости от типа сигнала
-    switch (signum) {
+    switch (signum)
+    {
         case SIGINT:
             fprintf(stderr, "Программа прервана пользователем.\n");
             writeLog("%s\n", "Программа прервана пользователем.");
@@ -35,8 +36,8 @@ void signalHandler(int signum) {
     exit(1);
 }
 
-// Функция для обработки таймера неактивности пользователя
-void timeoutHandler() {
+void timeoutHandler()
+{
     // Выводим сообщение об ошибке
     fprintf(stderr, "Превышено время ожидания.\n");
     writeLog("%s\n", "Превышено время ожидания.");
@@ -44,32 +45,38 @@ void timeoutHandler() {
     exit(1);
 }
 
-// Функция для открытия файла журнала для записи или создания его, если он не существует
-void openLog(char** log_file, char* logFileName) {
+void openLog(char** logFile, char* logFileName)
+{
     // Если имя файла журнала не задано, то используем стандартное имя
-    if (*log_file == NULL) {
-        *log_file = logFileName;
+    if (*logFile == NULL)
+    {
+        *logFile = logFileName;
     }
     // Открываем файл журнала для записи или создаем его, если он не существует
-    logfd = fopen(*log_file, "a");
+    logfd = fopen(*logFile, "a");
+
     // Проверяем на ошибки
-    if (logfd == NULL) {
+    if (logfd == NULL)
+    {
         perror("fopen");
         exit(1);
     }
 }
 
-// Функция для записи сообщений в файл журнала с помощью fprintf
-void writeLog(const char *format, ...) {
+void writeLog(const char* format, ...)
+{
     // Проверяем, что файл журнала открыт
-    if (logfd == NULL) {
+    if (logfd == NULL)
+    {
         return;
     }
+
     // Получаем текущее время и форматируем его в строку
     time_t t = time(NULL);
     struct tm *tm = localtime(&t);
     char time_str[20];
     strftime(time_str, 20, "%Y-%m-%d %H:%M:%S", tm);
+
     // Выводим время в файл журнала
     fprintf(logfd, "[%s] ", time_str);
 
@@ -90,8 +97,6 @@ void writeLog(const char *format, ...) {
     va_end(args);
 }
 
-
-// Функция для установки таймера неактивности пользователя с помощью alarm и signal
 void setTimer(int timeout) {
     // Проверяем, что время ожидания задано
     if (timeout > 0) {

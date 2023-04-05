@@ -16,13 +16,14 @@
 #define PORT 5555
 #define MAXDATASIZE 1024
 
-// переменную для хранения дескриптора файла журнала
+// Переменная для хранения дескриптора файла журнала
 extern FILE* logfd;
 
-int main(int argc, char *argv[]) {
-    int sockfd; // дескриптор сокета
-    char buffer[MAXDATASIZE]; // буфер для приема и отправки данных
-    struct sockaddr_in servAddr; // структура адреса сервера
+int main(int argc, char *argv[])
+{
+    int sockfd; // Дескриптор сокета
+    char buffer[MAXDATASIZE]; // Буфер для приема и отправки данных
+    struct sockaddr_in servAddr; // Структура адреса сервера
 
     // Объявляем переменные для коэффициентов уравнения
     double a = 0;
@@ -36,17 +37,17 @@ int main(int argc, char *argv[]) {
     signal(SIGSEGV, signalHandler);
 
     // Объявляем и инициализируем переменные для хранения аргументов командной строки
-    char *log_file = NULL; // имя файла журнала
+    char *logFile = NULL; // Имя файла журнала
     int timeout = 0; // время ожидания ввода пользователя в секундах
 
     // Вызываем функцию для обработки коэффициентов уравнения из командной строки
-    int result = ParseArgsClient(argc, argv, &log_file, &timeout, &a, &b, &c,
+    int result = ParseArgsClient(argc, argv, &logFile, &timeout, &a, &b, &c,
                                  &d);
 
     char* logFileName = "client.log";
 
     // Открываем файл журнала
-    openLog(&log_file, logFileName);
+    openLog(&logFile, logFileName);
 
     // Проверяем результат функции
     if (result != 0) {
